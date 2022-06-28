@@ -21,9 +21,15 @@ const watch = () => {
 
 /* 아래 ES5 코드를 ES6 코드로 변경합니다. ------------------------------------------ */
 
-var euid = {
+const euid = Object.freeze({
   name: '이듬',
-  show: show,
-  look: look,
-  watch: watch,
-};
+  show,
+  look,
+  watch() {
+    return `${this.name} 관찰하다.`;
+  },
+});
+
+console.log(euid.show());
+console.log(euid.look());
+console.log(euid.watch());
