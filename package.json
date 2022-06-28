@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "type": "module",
+  "name": "browser-react-app",
+  "version": "0.0.1",
+  "description": "웹 브라우저 환경에서의 React 앱",
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@babel/preset-env": "7.16.0",
+    "@testing-library/jest-dom": "5.15.0",
+    "@types/jest": "27.0.2",
+    "babel-jest": "27.3.1",
+    "eslint": "8.2.0",
+    "eslint-plugin-jest": "25.2.4",
+    "eslint-plugin-react": "7.27.0",
+    "eslint-watch": "8.0.0",
+    "jest": "27.3.1",
+    "live-server": "1.1.0",
+    "node-dev": "7.1.0",
+    "npm-run-all": "4.1.5",
+    "onchange": "7.1.0",
+    "prettier": "2.4.1"
+  },
+  "scripts": {
+    "start": "run-p serve watch:compile",
+    "serve": "npx live-server public",
+    "compile": "babel public/src/*.js -d public/scripts",
+    "watch:compile": "npm run compile -- -w",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "watch:lint": "esw ./ --watch --color --ignore-path .gitignore",
+    "format": "prettier --write ./client ./server --ignore-path .gitignore",
+    "watch:format": "onchange ./client ./server -- npm run format {{changed}}",
+    "watch": "npm run watch:lint & npm run watch:format",
+    "test": "jest"
+  }
+}
