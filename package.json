@@ -1,6 +1,7 @@
 {
   "name": "learning-ecmascript-next",
   "scripts": {
+    "start": "live-server src",
     "compile": "babel src/chapter/*.js -d compiled",
     "watch": "npm run compile -- --watch",
     "test": "jest --watchAll",
@@ -26,6 +27,7 @@
     "eslint": "8.13.0",
     "eslint-plugin-jest": "26.1.4",
     "jest": "27.5.1",
+    "live-server": "1.2.2",
     "regenerator-runtime": "0.13.9",
     "rimraf": "3.0.2"
   }
