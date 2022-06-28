@@ -2,3 +2,9 @@
 
 const numberWithComma = (n) =>
   n.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+
+// cjs
+// module.exports
+
+// es modules
+export default numberWithComma;

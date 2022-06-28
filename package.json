@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "learning-ecmascript-next",
   "scripts": {
     "start": "live-server src",
