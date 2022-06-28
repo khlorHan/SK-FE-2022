@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="./styles/style.css" />
 
     <!-- React API v17 vs v18 -->
-    <script src="//unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="//unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="//unpkg.com/react/umd/react.development.js" crossorigin></script>
+    <script src="//unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
     
   </head>
 
@@ -97,9 +97,14 @@
 
       const appVNode = React.createElement(React.Fragment, null, contentsVNode, buttonVNode);
 
-      ReactDOM.render(appVNode, document.getElementById('app'), () => {
-        console.log('React 애플리케이션이 문서에 렌더링 되었습니다.');
-      });
+      // v17
+      // ReactDOM.render(appVNode, document.getElementById('app'), () => {
+      //   console.log('React 애플리케이션이 문서에 렌더링 되었습니다.');
+      // });
+
+      // v18
+      const reactRoot = ReactDOM.createRoot(document.getElementById('app'));
+      reactRoot.render(appVNode);
         
     </script>
 
