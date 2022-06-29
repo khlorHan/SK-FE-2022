@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>랜덤 카운트 업 - React 렌더링 뷰 (브라우저 환경)</title>
+    
+    <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://iili.io/BI9OFI.png" />
+    <link href="./css/style.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
+  </head>
+
+  <body title="화면을 클릭하면 카운트 업이 다시 실행됩니다.">
+    
+    <div id="root"></div>
+
+    <script>
+      // --------------------------------------------
+      // [모듈: 웹 브라우저 리프래시]
+      // --------------------------------------------
+      
+      // 로케이션 리로드 이벤트 리스너
+      function handleReload() {
+        location.reload();
+      }
+
+      // 문서 객체 클릭 이벤트에 이벤트 리스너 바인딩
+      document.addEventListener('click', handleReload);
+
+    </script>
+
+    <script type="text/babel">
+      // --------------------------------------------
+      // [모듈: 랜덤 카운트 업]
+      // --------------------------------------------
+      
+      // FPS(초당 프레임 수) 설정
+      const FPS = 60;
+
+      // 최솟값 MIN
+      const MIN = 30;
+
+      // 최댓값 MAX
+      const MAX = 99;
+
+      // 랜덤값을 반환하는 유틸리티 getRandomCount 함수
+      const getRandomCount = (min = MIN, max = MAX) => 
+        Math.floor(Math.random() * (max - min) + min);
+      
+      // 목표 카운트 TARGET_COUNT 설정
+      const TARGET_COUNT = getRandomCount();
+
+      // 문서 타이틀 업데이트
+      document.title = `(${TARGET_COUNT}) ${document.title}`;
+
+      // count 초깃값
+      let count = 0;
+
+      // DOM 컨테이너 요소 참조
+      const container = document.getElementById('root');
+
+      // React DOM Root 요소 생성 (v18 API)
+      const root = ReactDOM.createRoot(container);
+
+      // render 함수
+      function render() {
+        root.render(
+          <output style={isComplete ? { animationName: 'none' } : null}>{count}</output>
+        );
+      }
+
+      // 파생 상태(derived state)
+      // 애니메이션 종료 여부
+      let isComplete = false;
+
+      // animate 함수
+      function animate() {
+        // 카운트 업
+        count += 1;
+
+        // 파생 상태 업데이트
+        if (count >= TARGET_COUNT) {
+          isComplete = true;
+          clearInterval(clearIntervalId);
+        }
+
+        render();
+      }
+
+      // 타이머 설정
+      const clearIntervalId = setInterval(animate, 1000 / FPS);
+
+    </script>
+  </body>
+</html>
