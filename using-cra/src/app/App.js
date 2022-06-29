@@ -1,11 +1,14 @@
-import logo from './logo.svg';
+import logo from 'assets/logo.svg';
+import { calcTax } from 'utils';
 import './App.css';
 
 function App() {
+  calcTax(10_000);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img data-testid="logo" src={logo} className="App-logo" alt="React" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
