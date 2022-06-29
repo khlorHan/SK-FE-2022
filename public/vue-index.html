@@ -19,8 +19,8 @@
     <noscript>이 사이트를 이용하려면? 사용 중인 웹 브라우저에서 JavaScript를 활성화 해야 합니다.</noscript>
 
     <div id="app">
-
-      <div class="contents" lang="en">
+      <!-- Vue Root App Template -->
+      <div class="contents" v-bind:lang="lang">
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
       </div>
@@ -37,10 +37,12 @@
 
       const app = Vue.createApp({
         data: () => ({
+          lang: 'en',
           title: 'Imperative Programming',
           description: `In computer science, imperative programming is a programming paradigm that uses statements that change a program's state.`
         })
       });
+
       app.mount('#app');
         
     </script>
