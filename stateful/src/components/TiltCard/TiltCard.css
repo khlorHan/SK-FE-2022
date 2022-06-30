@@ -1,0 +1,35 @@
+.tiltCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 220px;
+  margin: 30px;
+  padding: 3em;
+  background: linear-gradient(to right bottom, #e02d11, #911b7a);
+  color: #fff;
+}
+
+.tiltCard p {
+  line-height: 1.5;
+  text-shadow: 0 4px 4px rgba(30 20 0 / 0.2);
+  font-weight: 500;
+  word-spacing: 0.05em;
+}
+
+.tiltCard a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* TestyleF Container */
+.textyleF p {
+  opacity: 0;
+  perspective: 200px;
+}
+
+/* TestyleF Child */
+.textyleF span {
+  opacity: 0;
+  transform: rotateY(-90deg);
+}

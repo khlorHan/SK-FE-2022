@@ -1,13 +1,10 @@
 /* eslint-disable no-unused-vars */
 import './App.css';
-
-import $ from 'jquery';
 import { Component, createRef } from 'react';
 import { RandomCountUp, Spinner, Button, TiltCard } from '@/components';
 import { getRandom } from '@/utils';
 import spinnerPath from '@/assets/spinner.svg';
 
-// stateful component
 class App extends Component {
   #buttonRef = createRef(null);
 
@@ -15,7 +12,6 @@ class App extends Component {
     reCountUpKey: 100,
   };
 
-  // render phase
   render() {
     return (
       <div className="app">
@@ -33,44 +29,42 @@ class App extends Component {
           Re Count Up
         </Button>
 
-        <TiltCard>
-          Ref는 render 메서드에서 생성된 DOM 노드나 React 엘리먼트에 접근하는
-          방법을 제공합니다.
-        </TiltCard>
-        <TiltCard>
-          일반적인 React의 데이터 플로우에서 props는 부모 컴포넌트가 자식과
-          상호작용할 수 있는 유일한 수단입니다.
-        </TiltCard>
-        <TiltCard>
-          수정할 자식은 React 컴포넌트의 인스턴스일 수도 있고, DOM 엘리먼트일
-          수도 있습니다. React는 두 경우 모두를 위한 해결책을 제공합니다.
-        </TiltCard>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 120,
+          }}
+        >
+          {/* tiltOff, textFlip, showLinkPath */}
+          <TiltCard>
+            <p style={{ fontSize: 36 }}>Text Style Flip Effect</p>
+          </TiltCard>
+          <TiltCard>
+            <p>
+              일반적인 <a href="https://reactjs.org">React</a>의 데이터
+              플로우에서 props는 부모 컴포넌트가 자식과 상호작용할 수 있는
+              유일한 수단입니다.
+            </p>
+          </TiltCard>
+          <TiltCard>
+            <p>
+              수정할 자식은 React 컴포넌트의 인스턴스일 수도 있고, DOM
+              엘리먼트일 수도 있습니다. React는 두 경우 모두를 위한 해결책을
+              제공합니다.
+            </p>
+          </TiltCard>
+        </div>
 
-        {/* {!this.state.person ? (
-          <RandomCountUp
-            key={this.state.reCountUpKey}
-            min={32}
-            max={88}
-            step={2}
-          />
-        ) : (
-          <figure>
-            <img src={this.state.person.photo} alt={this.state.person.name} />
-            <figcaption>
-              {this.state.person.gender} / {this.state.person.email}
-            </figcaption>
-          </figure>
-        )} */}
+        <RandomCountUp
+          key={this.state.reCountUpKey}
+          min={32}
+          max={88}
+          step={2}
+        />
       </div>
     );
-  }
-
-  componentDidMount() {
-    // $(this.#buttonRef.current).css({
-    //   fontSize: 12,
-    // });
-
-    this.#buttonRef.current.focus();
   }
 
   handleReCountUp = () => {
