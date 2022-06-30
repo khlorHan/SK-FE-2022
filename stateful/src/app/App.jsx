@@ -78,11 +78,30 @@ class App extends Component {
   // 네트워크 통신 (side effects)
   // commit phase
   componentDidMount() {
-    const fetchedData = this.fetchData('https://randomuser.me/api');
+    this.fetchDataAsync('https://randomuser.me/api');
+  }
 
-    fetchedData.then(({ results }) => {
-      const [randomPerson] = results;
+  fetchData(endpoints) {
+    return fetch(endpoints)
+      .then((response) => response.json())
+      .then((json) => json)
+      .catch((error) => {
+        this.setState({
+          error,
+        });
+      })
+      .finally(() => {
+        this.setState({
+          loading: false,
+        });
+      });
+  }
 
+  async fetchDataAsync(endpoints) {
+    try {
+      const response = await fetch(endpoints);
+      const json = await response.json();
+      const [randomPerson] = json.results;
       const {
         email,
         name: { first, last },
@@ -98,24 +117,15 @@ class App extends Component {
           photo: picture,
         },
       });
-    });
-  }
-
-  fetchData(endpoints) {
-    // Promise
-    return fetch(endpoints)
-      .then((response) => response.json())
-      .then((json) => json)
-      .catch((error) => {
-        this.setState({
-          error,
-        });
-      })
-      .finally(() => {
-        this.setState({
-          loading: false,
-        });
+    } catch (error) {
+      this.setState({
+        error,
       });
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
   }
 }
 
