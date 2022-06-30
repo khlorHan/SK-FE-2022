@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import banner from '../assets/banner.jpg';
 
 import { A11yHidden } from '../components/A11yHidden/A11yHidden';
 
@@ -18,16 +19,8 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
-        {/* Skip to Content (Link) */}
-        {/* Banner (Text in Image) Alternate Text (Alt) */}
-        <A11yHidden
-          as="a"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreffer"
-        >
-          화면에 표시는 안되지만, 스크린 리더는 읽을 수 있는 콘텐츠
-        </A11yHidden>
+        <img src={banner.src} alt={''} aria-describedby="banner-desc" />
+        <A11yHidden id="banner-desc">세상.행복하길 ...</A11yHidden>
 
         <p className={styles.description}>
           Get started by editing{' '}
@@ -35,7 +28,11 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          <a
+            id="document"
+            href="https://nextjs.org/docs"
+            className={styles.card}
+          >
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
