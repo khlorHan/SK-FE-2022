@@ -15,4 +15,11 @@ a {
   box-sizing: border-box;
 }
 
-
+.custom-extends {
+  color: #2b10c4;
+  font-weight: 900;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 1000;
+}
