@@ -1,36 +1,23 @@
 /* eslint-disable no-unused-vars */
 import './App.css';
-import { Component } from 'react';
-import { RandomCountUp, Spinner, Button } from '@/components';
+import { Component, createRef } from 'react';
+import { RandomCountUp, Spinner, Button, TiltCard } from '@/components';
 import { getRandom } from '@/utils';
 import spinnerPath from '@/assets/spinner.svg';
 
-// stateful component
 class App extends Component {
+  #buttonRef = createRef(null);
+
   state = {
     reCountUpKey: 100,
-
-    loading: true,
-    error: null,
-    person: null,
   };
 
-  // render phase
   render() {
-    const { loading, person, error } = this.state;
-
-    if (loading) {
-      return <Spinner image={spinnerPath}>로딩 중입니다...</Spinner>;
-    }
-
-    if (error) {
-      return <div role="alert">{error.message}</div>;
-    }
-
     return (
       <div className="app">
         <Button
           lang="en"
+          ref={this.#buttonRef}
           onClick={this.handleReCountUp}
           style={{
             position: 'fixed',
@@ -42,28 +29,40 @@ class App extends Component {
           Re Count Up
         </Button>
 
-        <figure>
-          <img src={person.photo} alt={person.name} />
-          <figcaption>
-            {person.gender} / {person.email}
-          </figcaption>
-        </figure>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 120,
+          }}
+        >
+          {/* tiltOff, textFlip, showLinkPath */}
+          <TiltCard>
+            <p style={{ fontSize: 36 }}>Text Style Flip Effect</p>
+          </TiltCard>
+          <TiltCard>
+            <p>
+              일반적인 <a href="https://reactjs.org">React</a>의 데이터
+              플로우에서 props는 부모 컴포넌트가 자식과 상호작용할 수 있는
+              유일한 수단입니다.
+            </p>
+          </TiltCard>
+          <TiltCard>
+            <p>
+              수정할 자식은 React 컴포넌트의 인스턴스일 수도 있고, DOM
+              엘리먼트일 수도 있습니다. React는 두 경우 모두를 위한 해결책을
+              제공합니다.
+            </p>
+          </TiltCard>
+        </div>
 
-        {/* {!this.state.person ? (
-          <RandomCountUp
-            key={this.state.reCountUpKey}
-            min={32}
-            max={88}
-            step={2}
-          />
-        ) : (
-          <figure>
-            <img src={this.state.person.photo} alt={this.state.person.name} />
-            <figcaption>
-              {this.state.person.gender} / {this.state.person.email}
-            </figcaption>
-          </figure>
-        )} */}
+        <RandomCountUp
+          key={this.state.reCountUpKey}
+          min={32}
+          max={88}
+          step={2}
+        />
       </div>
     );
   }
@@ -73,60 +72,6 @@ class App extends Component {
       reCountUpKey: reCountUpKey + getRandom(100),
     }));
   };
-
-  // 사이드 이펙트를 사용하는 이유 1
-  // 네트워크 통신 (side effects)
-  // commit phase
-  componentDidMount() {
-    this.fetchDataAsync('https://randomuser.me/api');
-  }
-
-  fetchData(endpoints) {
-    return fetch(endpoints)
-      .then((response) => response.json())
-      .then((json) => json)
-      .catch((error) => {
-        this.setState({
-          error,
-        });
-      })
-      .finally(() => {
-        this.setState({
-          loading: false,
-        });
-      });
-  }
-
-  async fetchDataAsync(endpoints) {
-    try {
-      const response = await fetch(endpoints);
-      const json = await response.json();
-      const [randomPerson] = json.results;
-      const {
-        email,
-        name: { first, last },
-        gender,
-        picture: { large: picture },
-      } = randomPerson;
-
-      this.setState({
-        person: {
-          email,
-          gender,
-          name: `${first} ${last}`,
-          photo: picture,
-        },
-      });
-    } catch (error) {
-      this.setState({
-        error,
-      });
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
-  }
 }
 
 export default App;
