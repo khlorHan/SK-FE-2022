@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <RandomCountUp />
+        <RandomCountUp min={20} max={40} step={9} fps={15} />
       </div>
     );
   }
