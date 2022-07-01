@@ -66,8 +66,6 @@ export function TiltCard({
   // 비교: class 컴포넌트의 인스턴스 멤버와 같음
   const messageRef = useRef('hello React '); // { current: 'hello React' }
 
-  console.log('render -------------------------------------------------');
-
   return (
     <div
       ref={tiltCardRef}
@@ -85,7 +83,6 @@ export function TiltCard({
         type="button"
         onClick={() => {
           messageRef.current += '😉';
-          console.log(messageRef.current);
         }}
       >
         click
