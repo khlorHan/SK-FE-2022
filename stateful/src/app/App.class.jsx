@@ -3,8 +3,8 @@
 import './App.css';
 import { Component, createRef } from 'react';
 import { RandomCountUp, Spinner, Button, TiltCard } from '@/components';
-import { getRandom } from '@/utils';
 import spinnerPath from '@/assets/spinner.svg';
+import { getRandom } from '@/utils';
 
 class App extends Component {
   #buttonRef = createRef(null);
