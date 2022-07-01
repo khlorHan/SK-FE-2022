@@ -1,53 +1,36 @@
+/* eslint-disable no-unused-vars */
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { RandomCountUp, Button, TiltCard } from '@/components';
 import { getRandom } from '@/utils';
 
 function App() {
   const [reCountUpKey, setReCountUpKey] = useState(() => getRandom(100));
-  const handleReCountUp = () => setReCountUpKey(reCountUpKey + getRandom(100));
+
+  // 참조 동일성, 함수(참조형 데이터) 타입을
+  // 하위 컴포넌트에 prop으로 전달할 때
+  // 기억된(memoized) 함수 값을 전달해야
+  // 성능 최적화가 이뤄진다.
+  const handleReCountUp = useCallback(
+    () => setReCountUpKey(reCountUpKey + getRandom(100)),
+    [reCountUpKey]
+  );
+
+  const [renderingTester, setRenderingTester] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => setRenderingTester(renderingTester + 1), 1000);
+  }, [renderingTester]);
 
   return (
     <div className="app">
-      <Button
-        lang="en"
-        onClick={handleReCountUp}
-        style={{
-          position: 'fixed',
-          zIndex: 1000,
-          top: 20,
-          right: 20,
-        }}
-      >
-        Re Count Up
-      </Button>
-
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: 120,
-        }}
-      >
-        <TiltCard textFlip>
-          <p style={{ fontSize: 36 }}>Text Style Flip Effect</p>
-        </TiltCard>
-        <TiltCard showLinkPath>
-          <p>
-            일반적인 <a href="https://reactjs.org">React</a>의 데이터 플로우에서
-            props는 부모 컴포넌트가 자식과 상호작용할 수 있는 유일한 수단입니다.
-          </p>
-        </TiltCard>
-        <TiltCard tiltOff>
-          <p>
-            수정할 자식은 React 컴포넌트의 인스턴스일 수도 있고, DOM 엘리먼트일
-            수도 있습니다. React는 두 경우 모두를 위한 해결책을 제공합니다.
-          </p>
-        </TiltCard>
-      </div>
-
-      <RandomCountUp key={reCountUpKey} min={32} max={88} step={2} />
+      <RandomCountUp
+        key={reCountUpKey}
+        min={32}
+        max={88}
+        step={2}
+        onReCountUp={handleReCountUp}
+      />
     </div>
   );
 }

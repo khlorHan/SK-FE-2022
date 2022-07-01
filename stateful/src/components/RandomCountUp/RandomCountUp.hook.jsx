@@ -1,8 +1,26 @@
 import './RandomCountUp.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getRandomMinMax } from '@/utils';
+import { Button } from '@/components';
 
-export default function RandomCountUp({ min, max, step, current, fps }) {
+// useMemo는 값을 기억하기 위해 사용한다.
+// useCallback은 `함수` 값을 기억하기 위해 사용한다.
+
+// const ButtonStyles = {
+//   position: 'fixed',
+//   zIndex: 1000,
+//   top: 20,
+//   right: 20,
+// };
+
+export default function RandomCountUp({
+  min,
+  max,
+  step,
+  current,
+  fps,
+  onReCountUp,
+}) {
   const [name] = useState('Random Count Up');
   const [TARGET_COUNT] = useState(() => getRandomMinMax(min, max));
 
@@ -30,6 +48,21 @@ export default function RandomCountUp({ min, max, step, current, fps }) {
 
   return (
     <div className="randomCountUp">
+      <Button
+        lang="en"
+        onClick={onReCountUp}
+        style={useMemo(
+          () => ({
+            position: 'fixed',
+            zIndex: 1000,
+            top: 20,
+            right: 20,
+          }),
+          []
+        )}
+      >
+        Re Count Up
+      </Button>
       <output style={isComplete ? { animationName: 'none' } : null}>
         {count}
       </output>
