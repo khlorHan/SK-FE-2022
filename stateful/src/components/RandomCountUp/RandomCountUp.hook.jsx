@@ -4,9 +4,6 @@ import { getRandomMinMax } from '@/utils';
 import { useMouse } from '@/hooks';
 import { Button } from '@/components';
 
-// useMemo는 값을 기억하기 위해 사용한다.
-// useCallback은 `함수` 값을 기억하기 위해 사용한다.
-
 const ButtonStyles = {
   position: 'fixed',
   zIndex: 1000,
@@ -43,16 +40,21 @@ function RandomCountUp({ min, max, step, current, fps, onReCountUp }) {
   }, [count, fps, isComplete, step]);
 
   return (
-    <div className="randomCountUp">
+    <div
+      className="randomCountUp"
+      style={{
+        flexDirection: 'column',
+      }}
+    >
       <Button lang="en" onClick={onReCountUp} style={ButtonStyles}>
         Re Count Up
       </Button>
       <output style={isComplete ? { animationName: 'none' } : null}>
-        {count}{' '}
-        <span>
-          {x} / {y}
-        </span>
+        {count}
       </output>
+      <span style={{ fontSize: 24 }}>
+        {x} / {y}
+      </span>
     </div>
   );
 }

@@ -1,4 +1,6 @@
-export function Spinner({ image, children }) {
+import spinnerPath from '@/assets/spinner.svg';
+
+export function Spinner({ image = spinnerPath, children = '로딩 중...' }) {
   return (
     <figure
       role="alert"
