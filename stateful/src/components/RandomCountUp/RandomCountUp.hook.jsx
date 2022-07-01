@@ -46,23 +46,28 @@ export default function RandomCountUp({
     };
   }, [count, fps, isComplete, step]);
 
-  return (
-    <div className="randomCountUp">
+  // 렌더링에 사용될 컴포넌트를 기억한다.
+  const memoizedButton = useMemo(
+    () => (
       <Button
         lang="en"
         onClick={onReCountUp}
-        style={useMemo(
-          () => ({
-            position: 'fixed',
-            zIndex: 1000,
-            top: 20,
-            right: 20,
-          }),
-          []
-        )}
+        style={{
+          position: 'fixed',
+          zIndex: 1000,
+          top: 20,
+          right: 20,
+        }}
       >
         Re Count Up
       </Button>
+    ),
+    [onReCountUp]
+  );
+
+  return (
+    <div className="randomCountUp">
+      {memoizedButton}
       <output style={isComplete ? { animationName: 'none' } : null}>
         {count}
       </output>

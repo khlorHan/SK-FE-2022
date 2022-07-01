@@ -22,17 +22,20 @@ function App() {
     setTimeout(() => setRenderingTester(renderingTester + 1), 1000);
   }, [renderingTester]);
 
-  return (
-    <div className="app">
+  const memoizedRandomCountUp = useMemo(
+    () => (
       <RandomCountUp
-        key={reCountUpKey}
         min={32}
         max={88}
         step={2}
+        key={reCountUpKey}
         onReCountUp={handleReCountUp}
       />
-    </div>
+    ),
+    [handleReCountUp, reCountUpKey]
   );
+
+  return <div className="app">{memoizedRandomCountUp}</div>;
 }
 
 export default App;
