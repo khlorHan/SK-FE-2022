@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import './App.css';
 import { Component, createRef } from 'react';
 import { RandomCountUp, Spinner, Button, TiltCard } from '@/components';
@@ -37,18 +38,17 @@ class App extends Component {
             marginTop: 120,
           }}
         >
-          {/* tiltOff, textFlip, showLinkPath */}
-          <TiltCard>
+          <TiltCard textFlip>
             <p style={{ fontSize: 36 }}>Text Style Flip Effect</p>
           </TiltCard>
-          <TiltCard>
+          <TiltCard showLinkPath>
             <p>
               일반적인 <a href="https://reactjs.org">React</a>의 데이터
               플로우에서 props는 부모 컴포넌트가 자식과 상호작용할 수 있는
               유일한 수단입니다.
             </p>
           </TiltCard>
-          <TiltCard>
+          <TiltCard tiltOff>
             <p>
               수정할 자식은 React 컴포넌트의 인스턴스일 수도 있고, DOM
               엘리먼트일 수도 있습니다. React는 두 경우 모두를 위한 해결책을
