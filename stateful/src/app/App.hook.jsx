@@ -2,9 +2,12 @@
 import './App.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { RandomCountUp, Button, TiltCard } from '@/components';
+import { useMouse } from '@/hooks';
 import { getRandom } from '@/utils';
 
 function App() {
+  const { x, y } = useMouse();
+
   const [reCountUpKey, setReCountUpKey] = useState(() => getRandom(100));
 
   // 참조 동일성, 함수(참조형 데이터) 타입을
@@ -24,6 +27,10 @@ function App() {
 
   return (
     <div className="app">
+      <div style={{ display: 'flex', gap: 12, padding: 20, marginBottom: 40 }}>
+        <output>{x}</output>
+        <output>{y}</output>
+      </div>
       <RandomCountUp
         min={32}
         max={88}
