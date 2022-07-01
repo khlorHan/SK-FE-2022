@@ -2,7 +2,6 @@ import './RandomCountUp.css';
 import { Component } from 'react';
 import { getRandomMinMax } from '@/utils';
 
-// stateful component
 class RandomCountUp extends Component {
   static defaultProps = {
     min: 0,
