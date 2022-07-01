@@ -1,4 +1,4 @@
-export { default as RandomCountUp } from './RandomCountUp/RandomCountUp';
+export { default as RandomCountUp } from './RandomCountUp/RandomCountUp.hook';
 export * from './Button/Button';
 export * from './ErrorBoundary';
 export * from './Spinner';
