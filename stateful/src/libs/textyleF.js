@@ -9,6 +9,7 @@
 
 import jQuery from 'jquery';
 
+// IIFE, 즉시 실행 함수 식
 (function ($) {
   $.fn.textyleF = function (options) {
     var target = this;

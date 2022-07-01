@@ -15,7 +15,8 @@ export class TiltCard extends Component {
   #tiltCardRef = createRef(null);
 
   render() {
-    const { className, textFlip, showLinkPath, ...restProps } = this.props;
+    const { className, textFlip, showLinkPath, tiltOff, ...restProps } =
+      this.props;
     return (
       <div
         ref={this.#tiltCardRef}
@@ -23,6 +24,7 @@ export class TiltCard extends Component {
           'tiltCard',
           { textyleF: textFlip },
           { showLinkPath },
+          { tiltOff },
           className
         )}
         {...restProps}
