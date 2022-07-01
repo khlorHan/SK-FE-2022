@@ -30,7 +30,14 @@ class App extends Component {
           Re Count Up
         </Button>
 
-        <div
+        <RandomCountUp
+          key={this.state.reCountUpKey}
+          min={32}
+          max={88}
+          step={2}
+        />
+
+        {/* <div
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -55,14 +62,7 @@ class App extends Component {
               제공합니다.
             </p>
           </TiltCard>
-        </div>
-
-        <RandomCountUp
-          key={this.state.reCountUpKey}
-          min={32}
-          max={88}
-          step={2}
-        />
+        </div> */}
       </div>
     );
   }
