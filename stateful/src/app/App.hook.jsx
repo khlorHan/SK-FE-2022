@@ -22,8 +22,8 @@ function App() {
     setTimeout(() => setRenderingTester(renderingTester + 1), 1000);
   }, [renderingTester]);
 
-  const memoizedRandomCountUp = useMemo(
-    () => (
+  return (
+    <div className="app">
       <RandomCountUp
         min={32}
         max={88}
@@ -31,11 +31,8 @@ function App() {
         key={reCountUpKey}
         onReCountUp={handleReCountUp}
       />
-    ),
-    [handleReCountUp, reCountUpKey]
+    </div>
   );
-
-  return <div className="app">{memoizedRandomCountUp}</div>;
 }
 
 export default App;
